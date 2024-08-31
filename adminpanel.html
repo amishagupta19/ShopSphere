@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ShopSphere Admin Panel</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-gray-100">
+   <!-- Navbar -->
+   <nav class="w-full h-16 bg-indigo-200 flex justify-between px-4 md:px-6 items-center shadow-md">
+    <div class="text-2xl text-indigo-700 font-extrabold">ShopSphere</div>
+   </nav>
+
+  <!-- Admin Panel Container -->
+  <div class="flex h-screen">
+
+    <!-- Sidebar -->
+    <div class="w-64 bg-indigo-800 text-white flex flex-col">
+      <div class="p-4 text-xl font-semibold border-b border-indigo-700">Admin Panel</div>
+      <nav class="flex-1 p-4 space-y-2">
+        <a href="#users" class="block py-2 px-3 rounded hover:bg-indigo-700">User Management</a>
+        <a href="#categories" class="block py-2 px-3 rounded hover:bg-indigo-700">Category Management</a>
+        <a href="#products" class="block py-2 px-3 rounded hover:bg-indigo-700">Product Management</a>
+      </nav>
+    </div>
+
+    <!-- Main Content Area -->
+    <div class="flex-1 p-6 overflow-y-auto">
+      <!-- User Management Section -->
+      <section id="users" class="mb-8">
+        <h2 class="text-2xl font-semibold mb-4">User Management</h2>
+        <div class="bg-white shadow rounded-lg p-6">
+          <div class="mb-4">
+            <button id="addUserBtn" class="bg-green-600 text-white px-3 py-2 rounded hover:bg-green-700">Add User</button>
+          </div>
+          <ul id="userList" class="space-y-2">
+            <!-- Users will be dynamically added here -->
+          </ul>
+        </div>
+      </section>
+
+      <!-- Category Management Section -->
+      <section id="categories" class="mb-8">
+        <h2 class="text-2xl font-semibold mb-4">Category Management</h2>
+        <div class="bg-white shadow rounded-lg p-6">
+          <div class="mb-4">
+            <button id="addCategoryBtn" class="bg-green-600 text-white px-3 py-2 rounded hover:bg-green-700">Add Category</button>
+          </div>
+          <ul id="categoryList" class="space-y-2">
+            <!-- Categories will be dynamically added here -->
+          </ul>
+        </div>
+      </section>
+
+      <!-- Product Management Section -->
+      <section id="products" class="mb-8">
+        <h2 class="text-2xl font-semibold mb-4">Product Management</h2>
+        <div class="bg-white shadow rounded-lg p-6">
+          <div class="mb-4">
+            <button id="addProductBtn" class="bg-green-600 text-white px-3 py-2 rounded hover:bg-green-700">Add Product</button>
+          </div>
+          <ul id="productList" class="space-y-2">
+            <!-- Products will be dynamically added here -->
+          </ul>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <footer class="bg-indigo-800 text-white py-8 px-4 md:px-8">
+    <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
+        <!-- Footer Logo and Main Links -->
+        <div>
+            <div class="text-2xl font-bold mb-4">ShopSphere</div>
+            <ul class="space-y-2">
+                <li><a href="#" class="hover:underline">Site Map</a></li>
+                <li><a href="#" class="hover:underline">Sell on ShopSphere</a></li>
+                <li><a href="#" class="hover:underline">Blogs</a></li>
+                <li><a href="#" class="hover:underline">FAQs</a></li>
+            </ul>
+        </div>
+        <!-- Contact Information -->
+        <div>
+            <div class="text-lg font-bold mb-4">Contact Us</div>
+            <ul class="space-y-2">
+                <li><a href="mailto:sell@flipkart.com" class="hover:underline">Sell@ShopSphere.com</a></li>
+                <li>© 2024 ShopSphere. All rights reserved</li>
+            </ul>
+        </div>
+        <!-- Legal Links -->
+        <div>
+            <div class="text-lg font-bold mb-4">Legal</div>
+            <ul class="space-y-2">
+                <li><a href="#" class="hover:underline">Privacy Policy</a></li>
+                <li><a href="#" class="hover:underline">Terms of Usage</a></li>
+                <li><a href="#" class="hover:underline">User Site Map</a></li>
+            </ul>
+        </div>
+    </div>
+</footer>
+
+  <!-- JavaScript Section -->
+  <script>
+    // Example data arrays
+    let categories = [];
+    let products = [];
+    let users = [];
+
+    // Render Categories Function
+    function renderCategories(categories, container) {
+      container.innerHTML = ''; // Clear existing content
+
+      categories.forEach((category, index) => {
+        const categoryItem = document.createElement('li');
+        categoryItem.classList.add('bg-gray-100', 'p-4', 'rounded', 'mb-2');
+        
+        categoryItem.innerHTML = `
+          <div class="flex justify-between items-center">
+            <span>${category.name}</span>
+            <div class="space-x-2">
+              <button onclick="editCategory(${index})" class="bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700">Edit</button>
+              <button onclick="deleteCategory(${index})" class="bg-red-600 text-white px-3 py-1 rounded hover:bg-red-700">Delete</button>
+              <button onclick="addSubcategory(${index})" class="bg-green-600 text-white px-3 py-1 rounded hover:bg-green-700">Add Subcategory</button>
+            </div>
+          </div>
+          <ul class="pl-4 mt-2 space-y-2" id="subcategoryList-${index}">
+            <!-- Subcategories will be dynamically added here -->
+          </ul>
+        `;
+
+        // Render subcategories
+        const subcategoryList = categoryItem.querySelector(`#subcategoryList-${index}`);
+        renderCategories(category.subcategories, subcategoryList);
+
+        container.appendChild(categoryItem);
+      });
+    }
+
+    // Add Category
+    function addCategory() {
+      const categoryName = prompt('Enter category name:');
+      if (categoryName) {
+        categories.push({ name: categoryName, subcategories: [] });
+        renderCategories(categories, document.getElementById('categoryList'));
+      }
+    }
+
+    // Edit Category
+    function editCategory(index) {
+      const newName = prompt('Edit category name:', categories[index].name);
+      if (newName) {
+        categories[index].name = newName;
+        renderCategories(categories, document.getElementById('categoryList'));
+      }
+    }
+
+    // Delete Category
+    function deleteCategory(index) {
+      if (confirm('Are you sure you want to delete this category?')) {
+        categories.splice(index, 1);
+        renderCategories(categories, document.getElementById('categoryList'));
+      }
+    }
+
+    // Add Subcategory
+    function addSubcategory(index) {
+      const subcategoryName = prompt('Enter subcategory name:');
+      if (subcategoryName) {
+        categories[index].subcategories.push({ name: subcategoryName, subcategories: [] });
+        renderCategories(categories, document.getElementById('categoryList'));
+      }
+    }
+
+    // Render Products Function
+    function renderProducts(products, container) {
+      container.innerHTML = ''; // Clear existing content
+
+      products.forEach((product, index) => {
+        const productItem = document.createElement('li');
+        productItem.classList.add('bg-gray-100', 'p-4', 'rounded', 'mb-2');
+        
+        productItem.innerHTML = `
+          <div class="flex justify-between items-center">
+            <span>${product.name} - $${product.price}</span>
+            <div class="space-x-2">
+              <button onclick="editProduct(${index})" class="bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700">Edit</button>
+              <button onclick="deleteProduct(${index})" class="bg-red-600 text-white px-3 py-1 rounded hover:bg-red-700">Delete</button>
+            </div>
+          </div>
+        `;
+
+        container.appendChild(productItem);
+      });
+    }
+
+    // Add Product
+    function addProduct() {
+      const productName = prompt('Enter product name:');
+      const productPrice = prompt('Enter product price:');
+      if (productName && productPrice) {
+        products.push({ name: productName, price: parseFloat(productPrice) });
+        renderProducts(products, document.getElementById('productList'));
+      }
+    }
+
+    // Edit Product
+    function editProduct(index) {
+      const newName = prompt('Edit product name:', products[index].name);
+      const newPrice = prompt('Edit product price:', products[index].price);
+      if (newName && newPrice) {
+        products[index].name = newName;
+        products[index].price = parseFloat(newPrice);
+        renderProducts(products, document.getElementById('productList'));
+      }
+    }
+
+    // Delete Product
+    function deleteProduct(index) {
+      if (confirm('Are you sure you want to delete this product?')) {
+        products.splice(index, 1);
+        renderProducts(products, document.getElementById('productList'));
+      }
+    }
+
+    // Render Users Function
+    function renderUsers(users, container) {
+      container.innerHTML = ''; // Clear existing content
+
+      users.forEach((user, index) => {
+        const userItem = document.createElement('li');
+        userItem.classList.add('bg-gray-100', 'p-4', 'rounded', 'mb-2');
+        
+        userItem.innerHTML = `
+          <div class="flex justify-between items-center">
+            <span>${user.name} - ${user.email}</span>
+            <div class="space-x-2">
+              <button onclick="editUser(${index})" class="bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700">Edit</button>
+              <button onclick="deleteUser(${index})" class="bg-red-600 text-white px-3 py-1 rounded hover:bg-red-700">Delete</button>
+            </div>
+          </div>
+        `;
+
+        container.appendChild(userItem);
+      });
+    }
+
+    // Add User
+    function addUser() {
+      const userName = prompt('Enter user name:');
+      const userEmail = prompt('Enter user email:');
+      if (userName && userEmail) {
+        users.push({ name: userName, email: userEmail });
+        renderUsers(users, document.getElementById('userList'));
+      }
+    }
+
+    // Edit User
+    function editUser(index) {
+      const newName = prompt('Edit user name:', users[index].name);
+      const newEmail = prompt('Edit user email:', users[index].email);
+      if (newName && newEmail) {
+        users[index].name = newName;
+        users[index].email = newEmail;
+        renderUsers(users, document.getElementById('userList'));
+      }
+    }
+
+    // Delete User
+    function deleteUser(index) {
+      if (confirm('Are you sure you want to delete this user?')) {
+        users.splice(index, 1);
+        renderUsers(users, document.getElementById('userList'));
+      }
+    }
+
+    // Attach event listeners
+    document.getElementById('addCategoryBtn').addEventListener('click', addCategory);
+    document.getElementById('addProductBtn').addEventListener('click', addProduct);
+    document.getElementById('addUserBtn').addEventListener('click', addUser);
+
+    // Initial renders
+    renderCategories(categories, document.getElementById('categoryList'));
+    renderProducts(products, document.getElementById('productList'));
+    renderUsers(users, document.getElementById('userList'));
+  </script>
+</body>
+
+</html>

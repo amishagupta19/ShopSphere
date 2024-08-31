@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ShopSphere - Product Management</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-gray-100">
+  <!-- Navbar -->
+  <nav class="w-full h-16 bg-indigo-200 flex justify-between px-4 md:px-6 items-center shadow-md">
+    <div class="text-2xl text-indigo-700 font-extrabold">ShopSphere</div>
+  </nav>
+
+  <!-- Main Container -->
+  <div class="max-w-7xl mx-auto p-6">
+    <!-- Product Management Section -->
+    <section id="products" class="mb-8">
+      <h2 class="text-3xl font-semibold mb-6">Product Management</h2>
+      <div class="bg-white shadow rounded-lg p-8">
+        <div class="mb-6">
+          <button id="addProductBtn" class="bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50">Add Product</button>
+        </div>
+        <div class="mb-6">
+          <label for="categoryFilter" class="block text-gray-700 font-semibold mb-3">Filter by Category</label>
+          <select id="categoryFilter" class="block w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-green-500 focus:border-green-500">
+            <option value="">All Categories</option>
+          </select>
+        </div>
+        <div id="productList" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-8">
+          <!-- Products will be dynamically added here -->
+        </div>
+        <section id="categories" class="mb-8">
+          <h2 class="text-2xl font-semibold mb-6">Categories</h2>
+          <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-6">
+            <!-- Categories will be dynamically added here -->
+          </div>
+        </section>
+      </div>
+    </section>
+  </div>
+
+  <footer class="bg-indigo-700 text-white py-8 px-4 md:px-8">
+    <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
+        <!-- Footer Logo and Main Links -->
+        <div>
+            <div class="text-2xl font-bold mb-4">ShopSphere</div>
+            <ul class="space-y-2">
+                <li><a href="#" class="hover:underline">Site Map</a></li>
+                <li><a href="#" class="hover:underline">Sell on ShopSphere</a></li>
+                <li><a href="#" class="hover:underline">Blogs</a></li>
+                <li><a href="#" class="hover:underline">FAQs</a></li>
+            </ul>
+        </div>
+        <!-- Contact Information -->
+        <div>
+            <div class="text-lg font-bold mb-4">Contact Us</div>
+            <ul class="space-y-2">
+                <li><a href="mailto:sell@flipkart.com" class="hover:underline">Sell@ShopSphere.com</a></li>
+                <li>© 2024 ShopSphere. All rights reserved</li>
+            </ul>
+        </div>
+        <!-- Legal Links -->
+        <div>
+            <div class="text-lg font-bold mb-4">Legal</div>
+            <ul class="space-y-2">
+                <li><a href="#" class="hover:underline">Privacy Policy</a></li>
+                <li><a href="#" class="hover:underline">Terms of Usage</a></li>
+                <li><a href="#" class="hover:underline">User Site Map</a></li>
+            </ul>
+        </div>
+    </div>
+</footer>
+
+  <!-- JavaScript Section -->
+  <script>
+    let categories = [
+      { name: 'Electronics', image: 'https://rukminim2.flixcart.com/www/64/64/promos/09/07/2024/5f1413d6-e89d-497d-a060-7c4ad7742901.jpg?q=60' },
+      { name: 'Fashion', image: 'https://rukminim2.flixcart.com/www/64/64/promos/27/05/2024/16d096e4-3425-4e2e-9781-6fb1ece1f3d7.jpg?q=60' },
+      { name: 'Sports', image: 'https://rukminim2.flixcart.com/www/64/64/promos/09/07/2024/a8ac02c8-0118-45b6-ab05-90a959f9e9dd.jpg?q=60' },
+      { name: 'Beauty', image: 'https://rukminim2.flixcart.com/www/64/64/promos/09/07/2024/f13ffe75-154c-4162-866b-ffb6e54ee94c.jpg?q=60' },
+      { name: 'Home and Garden', image: 'https://rukminim2.flixcart.com/www/64/64/promos/27/05/2024/740c4a58-75f0-43cf-8d97-8c86f37644a2.jpg?q=60' },
+      { name: 'Collectibles and Arts', image: 'https://rukminim2.flixcart.com/www/64/64/promos/09/07/2024/47710dbe-a3b2-4b4a-8862-9b4ec185ac11.jpg?q=60' }
+    ];
+
+    let products = [];
+    let currentUser = 'User1'; // Replace with the current user's identification
+
+    // Render Categories in Filter and on Page
+    function renderCategories() {
+      const filter = document.getElementById('categoryFilter');
+      const categoryContainer = document.getElementById('categories').querySelector('.grid');
+      filter.innerHTML = '<option value="">All Categories</option>';
+      categoryContainer.innerHTML = '';
+
+      categories.forEach((category) => {
+        // Add to filter dropdown
+        const option = document.createElement('option');
+        option.value = category.name;
+        option.textContent = category.name;
+        filter.appendChild(option);
+
+        // Add to categories section
+        const categoryItem = document.createElement('div');
+        categoryItem.classList.add('text-center', 'space-y-2');
+        categoryItem.innerHTML = `
+          <img src="${category.image}" alt="${category.name}" class="w-20 h-20 object-cover rounded-full mx-auto">
+          <h3 class="text-lg font-semibold">${category.name}</h3>
+        `;
+        categoryContainer.appendChild(categoryItem);
+      });
+    }
+
+    // Render Products Function
+    function renderProducts() {
+      const filter = document.getElementById('categoryFilter').value;
+      const productList = document.getElementById('productList');
+      productList.innerHTML = ''; // Clear existing content
+
+      products
+        .filter(product => filter === '' || product.category === filter)
+        .forEach((product, index) => {
+          if (product.owner === currentUser) {
+            const productItem = document.createElement('div');
+            productItem.classList.add('text-center', 'space-y-2');
+
+            productItem.innerHTML = `
+              <img src="${product.image || 'https://via.placeholder.com/150'}" alt="${product.name}" class="w-20 h-20 object-cover rounded-full mx-auto">
+              <h3 class="text-lg font-semibold">${product.name}</h3>
+              <p class="text-gray-600">$${product.price}</p>
+              <p class="text-gray-500">Category: ${product.category}</p>
+              <div class="flex justify-center space-x-2">
+                <button onclick="editProduct(${index})" class="bg-indigo-600 text-white px-3 py-1 rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50">Edit</button>
+                <button onclick="deleteProduct(${index})" class="bg-red-600 text-white px-3 py-1 rounded-lg hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50">Delete</button>
+              </div>
+            `;
+
+            productList.appendChild(productItem);
+          }
+        });
+    }
+
+    // Add Product
+    function addProduct() {
+      const productName = prompt('Enter product name:');
+      const productPrice = prompt('Enter product price:');
+      const productCategory = prompt('Enter product category:');
+      const productImage = prompt('Enter product image URL:'); // For simplicity, using URL input
+      if (productName && productPrice && productCategory) {
+        products.push({
+          name: productName,
+          price: parseFloat(productPrice),
+          category: productCategory,
+          image: productImage || 'https://via.placeholder.com/150',
+          owner: currentUser
+        });
+        renderProducts();
+      }
+    }
+
+    // Edit Product
+    function editProduct(index) {
+      const newName = prompt('Edit product name:', products[index].name);
+      const newPrice = prompt('Edit product price:', products[index].price);
+      const newCategory = prompt('Edit product category:', products[index].category);
+      const newImage = prompt('Edit product image URL:', products[index].image);
+      if (newName && newPrice && newCategory) {
+        products[index].name = newName;
+        products[index].price = parseFloat(newPrice);
+        products[index].category = newCategory;
+        products[index].image = newImage || 'https://via.placeholder.com/150';
+        renderProducts();
+      }
+    }
+
+    // Delete Product
+    function deleteProduct(index) {
+      if (confirm('Are you sure you want to delete this product?')) {
+        products.splice(index, 1);
+        renderProducts();
+      }
+    }
+
+    // Event Listeners
+    document.getElementById('addProductBtn').addEventListener('click', addProduct);
+    document.getElementById('categoryFilter').addEventListener('change', renderProducts);
+
+    // Initial render
+    renderCategories();
+    renderProducts();
+  </script>
+</body>
+
+</html>

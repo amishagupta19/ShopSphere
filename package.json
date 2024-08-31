@@ -1,0 +1,12 @@
+{
+  "name": "shopsphere",
+  "version": "1.0.0",
+  "description": "This is an online selling platform where user can easily sell there products.",
+  "main": "tailwind.config.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build:css": "npx tailwindcss -i ./src/input.css -o ./dist/output.css --watch"
+  },
+  "author": "Amisha Gupta",
+  "license": "ISC"
+}

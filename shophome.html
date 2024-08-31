@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@3.3.1/dist/tailwind.min.css">
+    <link rel="stylesheet" href="edit.css">
+    <title>ShopSphere Home Page</title>
+</head>
+
+
+<body class="bg-slate-950">
+    <!--nav bar-->
+    <nav class="w-full h-14 bg-indigo-200 flex justify-between px-4 md:px-4 items-center">
+        <div class="text-2xl text-indigo-700 font-extrabold ">ShopSphere</div>
+        <div class="hidden md:block">
+            <!-- Link to the Login/Register Page -->
+            <a href="register.html" class="px-2 py-2 text-white font-bold bg-indigo-700 rounded cursor-pointer">
+                Sell on ShopSphere
+            </a>
+        </div>
+        <div class="md:hidden">
+            <a class="text-4xl" href="#">&#8801;</a>
+        </div>
+    </nav>
+    <!-- navbar ends here -->
+ 
+    <header class="relative">
+        <div class="relative overflow-hidden">
+            <div class="carousel-inner">
+                <div class="carousel-item relative">
+                    <img src="https://seller.shopsy.in/wp-content/uploads/2024/04/Banner-2-1.jpg" alt="First slide" class="w-full h-72 object-cover">
+                    <div class="absolute inset-0 flex items-center justify-left text-white text-xl font-bold ml-20 mt-20 md:text-3xl md:ml-48">
+                        With no return policy*,<br>
+                        business at Shopsy is,<br>
+                        tensions-free
+                    </div>
+            </div>
+
+            <!-- Second Carousel Item -->
+            <div class="carousel-item relative">
+                <img src="https://seller.shopsy.in/wp-content/uploads/2024/04/Desktop-first.jpg" alt="Second slide" class="w-full h-72 object-cover">
+                <div class="absolute inset-0 flex items-center justify-left text-white text-xl font-bold ml-20 mt-20 md:text-3xl md:ml-48">
+                    From Clothes to cookware,<br>
+                    sell everything on shopsy at<br>
+                    low business costs
+                    
+                </div>
+            </div>
+
+            <!-- third carousel item -->
+            <div class="carousel-item relative">
+                <img src="https://seller.shopsy.in/wp-content/uploads/2024/04/Desktop-second.jpg" alt="Third slide" class="w-full h-72 object-cover">
+                <div class="absolute inset-0 flex items-center justify-left text-white text-xl font-bold ml-20 mt-20 md:text-3xl md:ml-48">
+                    Get up to 50% more<br>
+                    orders @0 cost only with<br>
+                    Shopsy Budget Tag!
+                </div>
+            </div>
+        </div>
+        <!-- Navigation controls -->
+        <button id="prev" class="absolute top-1/2 left-0 transform -translate-y-1/2 bg-gray-800 text-white p-2 rounded"><</button>
+        <button id="next" class="absolute top-1/2 right-0 transform -translate-y-1/2 bg-gray-800 text-white p-2 rounded">></button>
+        </div>
+    </header>
+
+    <!-- about section -->
+    <!-- About ShopSphere Section -->
+    <section class="bg-gray-100 py-12 px-4 md:px-8">
+        <div class="max-w-6xl mx-autoflex flex-col md:flex md:flex-row items-center">
+
+            <!-- text section -->
+            <div class="md:w-1/2 mb-8 md:mb-10 md:ml-14">
+
+                <h2 class="text-3xl font-bold text-gray-900 mb-6">About ShopSphere</h2>
+                <p class="text-lg text-gray-700 leading-relaxed">
+                    Introducing, ShopSphere, India’s rapidly expanding Low commission e-commerce platform. The platform is designed to bring sellers from every corner of India to reach a diverse customer base. With ShopSphere, sellers have the opportunity to grow their business like never before. The platform offers a plethora of benefits to sellers, and its promise has made it one of India’s growing marketplaces.
+                </p>
+            </div>
+             <!-- Image -->
+             <div class="md:w-1/2 md:ml-auto  md:flex justify-normal">
+                <img src="https://seller.shopsy.in/wp-content/uploads/2022/02/Shopsy-1-22.png" alt="Shopsy" class="max-w-full h-auto">
+            </div>
+        </div>
+    </section>
+
+    <!-- why seller choose shopsphere -->
+     <div class="h-auto w-100 flex flex-wrap flex-col items-center text-center bg-white p-8">
+        <div class="w-full h-auto flex flex-wrap flex-col items-center mb-10">
+            <p class="text-black font-bold text-3xl">Why sellers choose ShopSphere :</p>
+        </div>
+
+        <div class="w-full flex flex-wrap justify-evenly">
+            <div class="w-46 flex flex-col items-center mb-12">
+                <img class="w-44 h-44" src="https://seller.shopsy.in/wp-content/uploads/2024/07/lowest-commission-3.png" alt="">
+                <p class="text-2xl font-bold text-black">Lowest commission</p>
+                <p class="text-xl  text-gray-600">Pay Lowest commission on all<br> Shopsy exclusive verticals.</p>
+            </div>
+
+            <div class="w-46 flex flex-col items-center mb-12">
+                <img class="w-44 h-44" src="https://seller.shopsy.in/wp-content/uploads/2022/12/MicrosoftTeams-image-8.jpg" alt="">
+                <p class="text-2xl font-bold text-black">Simple Fee<br> Structure</p>
+                <p class="text-xl text-gray-600">Sellers can benefit from lowest<br> cost of doing business</p>
+            </div>
+
+            <div class="w-46 flex flex-col items-center mb-12">
+                <img class="w-44 h-44" src="https://seller.shopsy.in/wp-content/uploads/2023/01/fastest-Growing-Marketplace.png.jpg" alt="">
+                <p class="text-2xl font-bold text-black">One of the fastest<br> Growing Marketplaces!</p>
+                <p class="text-xl text-gray-600">Gain access to a 200 Mn+<br> customer base.</p>
+            </div>
+        </div>
+        <div class="w-full flex flex-wrap justify-evenly">
+            <div class="w-46 flex flex-col items-center mb-12">
+                <img class="w-44 h-44" src="https://seller.shopsy.in/wp-content/uploads/2021/12/no-paperwork.png" alt="">
+                <p class="text-2xl font-bold text-black">Easy <br>Onboarding</p>
+                <p class="text-xl  text-gray-600">Completely Paperless & easy to<br> set up online business</p>
+            </div>
+
+            <div class="w-46 flex flex-col items-center mb-12">
+                <img class="w-44 h-44" src="https://seller.shopsy.in/wp-content/uploads/2023/10/No-Return.png" alt="">
+                <p class="text-2xl font-bold text-black">No Return Policy</p>
+                <p class="text-xl text-gray-600">Sell your products below Rs.175<br> & avail the no-return policy*.</p>
+            </div>
+
+            <div class="w-46 flex flex-col items-center mb-12">
+                <img class="w-44 h-44" src="https://seller.shopsy.in/wp-content/uploads/2023/10/Low-Cost-of-Doing-Business-1.png" alt="">
+                <p class="text-2xl font-bold text-black">Low Cost of Doing<br> Business</p>
+                <p class="text-xl text-gray-600">Get access to well-established<br> logistics & deliver your products<br> to 19k+ pin codes with low setup<br> cost.</p>
+            </div>
+        </div>
+     </div>
+
+     <footer class="bg-blue-500 text-white py-8 px-4 md:px-8">
+        <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- Footer Logo and Main Links -->
+            <div>
+                <div class="text-2xl font-bold mb-4">ShopSphere</div>
+                <ul class="space-y-2">
+                    <li><a href="#" class="hover:underline">Site Map</a></li>
+                    <li><a href="#" class="hover:underline">Sell on ShopSphere</a></li>
+                    <li><a href="#" class="hover:underline">Blogs</a></li>
+                    <li><a href="#" class="hover:underline">FAQs</a></li>
+                </ul>
+            </div>
+            <!-- Contact Information -->
+            <div>
+                <div class="text-lg font-bold mb-4">Contact Us</div>
+                <ul class="space-y-2">
+                    <li><a href="mailto:sell@flipkart.com" class="hover:underline">Sell@ShopSphere.com</a></li>
+                    <li>© 2024 ShopSphere. All rights reserved</li>
+                </ul>
+            </div>
+            <!-- Legal Links -->
+            <div>
+                <div class="text-lg font-bold mb-4">Legal</div>
+                <ul class="space-y-2">
+                    <li><a href="#" class="hover:underline">Privacy Policy</a></li>
+                    <li><a href="#" class="hover:underline">Terms of Usage</a></li>
+                    <li><a href="#" class="hover:underline">User Site Map</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+    
+    
+    <script src="script.js"></script>
+</body>
+</html>

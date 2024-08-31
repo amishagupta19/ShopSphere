@@ -1,0 +1,14 @@
+.carousel-inner {
+    transition: transform 0.5s ease-in-out;
+    display: flex;
+}
+.carousel-item {
+    flex-shrink: 0;
+    width: 100%;
+}
+.carousel-item img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1920 / 900; /* Ensure images maintain a 1920 / 900 aspect ratio */
+    object-fit: cover; /* Ensures the image covers the container without distortion */
+}
